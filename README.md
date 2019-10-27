@@ -1,4 +1,4 @@
-# drugsimulator
+# Hospital Simulator
 
 ### Coding challenge
 
