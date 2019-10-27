@@ -69,7 +69,7 @@ Where:
 * NP is a number of patients for a given state;
 E.g. “F:0,H:2,D:0,T:0,X:1” means there are two healthy patients and one that is dead.
 
-###### Examples
+##### Examples
 
 Input: “D,D” “”
 Output: “F:0,H:0,D:0,T:0,X:2” (diabetic patients die without insulin)
@@ -85,7 +85,7 @@ $ java -cp hospital-simulator.jar com.edgelab.hospital.Application F P
 F:0,H:1,D:0,T:0,X:0
 ```
 
-###### Result
+##### Result
 
 When you feel pleased with your solution, please send us a zip source code of your project
 with instructions how to build and run it. Feel free to use a build automation tool
