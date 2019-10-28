@@ -4,7 +4,13 @@ import java.util.stream.Stream;
 
 public class SimHospital {
 
-    private static Map<String, Integer> result = Stream.of(States.values()).collect(Collectors.toMap(e -> e.code, e -> 0));
+    private static Map<String, Integer> result = new HashMap<>();
+
+    private static void initResult() {
+        for(States state : States.values()) {
+            result.put(state.code, 0);
+        }
+    }
 
     enum States {
         Fever("F"), Healthy("H"), Diabetes("D"), Tuberculosis("T"), Dead("X");
@@ -45,7 +51,7 @@ public class SimHospital {
     }
 
     static class Subject {
-        private States state;
+        States state;
 
         Subject(States state) {
             this.state = state;
@@ -82,16 +88,20 @@ public class SimHospital {
                     Random r = new Random();
                     if (r.nextInt(1000000) == 1337) // Flying Spaghetti Monster miracle
                         state = States.Healthy;
-                    break;
             }
-
-            result.merge(state.code, 1, Integer::sum);
         }
+    }
+
+    static void incrementStateCount(States state) {
+        int count = result.get(state.code);
+        result.put(state.code, count + 1);
     }
 
     public static void main(String[] args) throws Exception {
         List<Drugs> drugs = new ArrayList<>();
-        List<Subject> subjects  = new ArrayList<>();
+        List<Subject> subjects = new ArrayList<>();
+
+        initResult();
 
         if(args.length > 1)
             for (String drug : args[1].split(","))
@@ -101,7 +111,10 @@ public class SimHospital {
             for (String state : args[0].split(","))
                 subjects.add(new Subject(States.getState(state)));
 
-        subjects.forEach(sbj -> sbj.takeDrugs(drugs));
+        for(Subject subject : subjects) {
+            subject.takeDrugs(drugs);
+            incrementStateCount(subject.state);
+        }
 
         System.out.println(
                 result.keySet().stream()
