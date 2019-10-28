@@ -2,19 +2,13 @@
 
 ### Coding challenge
 
-We would like to ask you to do a fun coding exercise for us. Please keep in mind that it is not
-a classical algorithmic problem, so your task is not limited to producing a correct result.
-Imagine that your code will be read and modified by other developers, so they should be
-able to understand it easily. You should also remember that code should be easily extensible
-and maintainable, but at the same time beware of overly complicated solutions and
-speculative design (we value a lot the KISS principle ;-)).
-Last but not least: there is no single best solution, so we encourage you to design and
-implement the solution in a way you think is right.
+We would like to ask you to do a fun coding exercise for us. Please keep in mind that it is not a classical algorithmic problem, so your task is not limited to producing a correct result.
+Imagine that your code will be read and modified by other developers, so they should be able to understand it easily. You should also remember that code should be easily extensible and maintainable, but at the same time beware of overly complicated solutions and speculative design (we value a lot the KISS principle ;-)).
+Last but not least: there is no single best solution, so we encourage you to design and implement the solution in a way you think is right.
 
 #### Problem description
 
-You were asked by a doctor friend to prepare for her a “Hospital simulator”, which can
-simulate the future patients’ state, based on their current state and a list of drugs they take.
+You were asked by a doctor friend to prepare for her a “Hospital simulator”, which can simulate the future patients’ state, based on their current state and a list of drugs they take.
 
 #### Patients can have one of these states:
 
@@ -24,8 +18,7 @@ simulate the future patients’ state, based on their current state and a list o
 * T: Tuberculosis
 * X: Dead
 
-#### In the `Hospital simulator` drugs are provided to all patients. It is not possible to target a
-specific patient. This is the list of available drugs:
+#### In the `Hospital simulator` drugs are provided to all patients. It is not possible to target a specific patient. This is the list of available drugs:
 
 * As: Aspirin
 * An: Antibiotic
@@ -50,13 +43,11 @@ and resurrects a dead patient (Dead becomes Healthy).
 
 ##### Parameter 1
 
-List of patients' health status codes, separated by a comma. e.g. “D,F,F” means we have 3
-patients, one with diabetes and two with fever.
+List of patients' health status codes, separated by a comma. e.g. “D,F,F” means we have 3 patients, one with diabetes and two with fever.
 
 ##### Parameter 2
 
-List of drugs codes, separated by a comma, e.g. “As,I” means patients will be treated with
-Aspirin and Insulin.
+List of drugs codes, separated by a comma, e.g. “As,I” means patients will be treated with Aspirin and Insulin.
 
 ##### Output
 
