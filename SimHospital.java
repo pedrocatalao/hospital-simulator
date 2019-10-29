@@ -1,16 +1,8 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-public class SimHospital {
+class SimHospital {
 
-    private static Map<String, Integer> result = new HashMap<>();
-
-    private static void initResult() {
-        for(States state : States.values()) {
-            result.put(state.code, 0);
-        }
-    }
+    private static Map<String, Integer> outcome = new HashMap<>();
 
     enum States {
         Fever("F"), Healthy("H"), Diabetes("D"), Tuberculosis("T"), Dead("X");
@@ -50,7 +42,7 @@ public class SimHospital {
         }
     }
 
-    static class Subject {
+    class Subject {
         States state;
 
         Subject(States state) {
@@ -92,33 +84,47 @@ public class SimHospital {
         }
     }
 
-    static void incrementStateCount(States state) {
-        int count = result.get(state.code);
-        result.put(state.code, count + 1);
+    private void incrementStateCount(States state) {
+        int count = outcome.get(state.code);
+        outcome.put(state.code, count + 1);
     }
 
-    public static void main(String[] args) throws Exception {
+    String formatOutcome() {
+        StringJoiner joiner = new StringJoiner(",");
+        for (String key : outcome.keySet()) {
+            String s = key + ":" + outcome.get(key);
+            joiner.add(s);
+        }
+        return joiner.toString();
+    }
+
+    void runSimulation(String[] args) throws Exception {
         List<Drugs> drugs = new ArrayList<>();
         List<Subject> subjects = new ArrayList<>();
 
-        initResult();
+        for(States state : States.values()) {
+            outcome.put(state.code, 0);
+        }
 
         if(args.length > 1)
             for (String drug : args[1].split(","))
                 drugs.add(Drugs.getDrug(drug));
 
         if(args.length > 0)
-            for (String state : args[0].split(","))
-                subjects.add(new Subject(States.getState(state)));
+            for (String state : args[0].split(",")) {
+                Subject subject = new Subject(States.getState(state));
+                subjects.add(subject);
+            }
 
         for(Subject subject : subjects) {
             subject.takeDrugs(drugs);
             incrementStateCount(subject.state);
         }
+    }
 
-        System.out.println(
-                result.keySet().stream()
-                .map(key -> key + ":" + result.get(key))
-                .collect(Collectors.joining(",")));
+    public static void main(String[] args) throws Exception {
+        SimHospital sim = new SimHospital();
+        sim.runSimulation(args);
+        System.out.println(sim.formatOutcome());
     }
 }
